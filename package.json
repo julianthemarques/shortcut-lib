@@ -1,10 +1,19 @@
 {
-  "name": "mosyle-test",
-  "version": "0.1.0",
+  "name": "@julianthemarques/use-shortcut-lib",
+  "version": "1.0.0",
+  "description": "React hook and component to handle single-key keyboard shortcuts.",
+  "author": "Juliano Marques",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",
@@ -15,9 +24,27 @@
     "react-dom": ">=16.8"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "tsup": "^6.0.0",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0"
+    "@types/react-dom": "^18.0.0",
+    "tsup": "^6.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "keyboard",
+    "shortcut",
+    "typescript",
+    "component"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "settings": "^0.1.1"
   }
 }
