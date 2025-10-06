@@ -6,7 +6,6 @@ type ShortcutProps = {
     keys: string | string[];
     onKey: (key: string, ev: KeyboardEvent) => void;
     options?: IShortcutOptions;
-    global?: boolean;
 };
 
 export const Shortcut = ({ children, keys, onKey, options }: ShortcutProps) => {

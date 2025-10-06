@@ -10,8 +10,7 @@ export type IShortcutOptions = {
 type IUseShortCut = (
   keys: string | string[],
   onKey: (key: string, event: KeyboardEvent) => any,
-  options?: IShortcutOptions,
-  global?: boolean
+  options?: IShortcutOptions
 ) => (event: KeyboardEvent) => void;
 
 const debounceHandler = (
@@ -70,9 +69,15 @@ export const useShortCut: IUseShortCut = (keys, onKey, options) => {
     preventDefault = false,
   } = options || {};
 
-  if (arraysAreEqual(includeClasses, excludeClasses)) return () => {};
+  if (
+    includeClasses &&
+    excludeClasses &&
+    arraysAreEqual(includeClasses, excludeClasses)
+  )
+    return () => {};
 
   const handler = debounce > 0 ? debounceHandler(onKey, debounce) : onKey;
+  
 
   return (event: KeyboardEvent) => {
     if (!shouldHandle(event.target, includeClasses, excludeClasses)) return;
