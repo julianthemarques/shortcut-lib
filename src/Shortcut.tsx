@@ -1,13 +1,23 @@
-import React from "react"
-import { useShortCut } from "./use-shortcut"
+import React from "react";
+import { IShortcutOptions, useShortCut } from "./use-shortcut";
 
-export const Shortcut = ({ children, keys, onKey }: { children: React.ReactNode, keys: string | string[], onKey: (key: string, ev: KeyboardEvent) => void }) => {
+type ShortcutProps = {
+    children?: React.ReactNode;
+    keys: string | string[];
+    onKey: (key: string, ev: KeyboardEvent) => void;
+    options?: IShortcutOptions;
+    global?: boolean;
+};
 
-    const shortcutHandler = useShortCut(keys, onKey)
+export const Shortcut = ({ children, keys, onKey, options }: ShortcutProps) => {
+    const shortcutHandler = useShortCut(keys, onKey, options);
 
     return (
-        <div onKeyDown={(ev) => shortcutHandler(ev as unknown as KeyboardEvent)}>
+        <div
+            onKeyDown={(ev: React.KeyboardEvent) => shortcutHandler(ev.nativeEvent)}
+        >
             {children}
-        </div >
-    )
-}
+        </div>
+    );
+
+};
