@@ -3,6 +3,9 @@
 A lightweight React utility for handling **keyboard shortcuts** — both **locally** (within focused elements) and **globally** (across the entire document).  
 Implements single-key detection with optional debounce and fine control over which elements respond.
 
+IMPORTANT ⚠️: The keys prop or parameter must use the exact string returned by the browser’s KeyboardEvent.key;
+Key names are case-sensitive — meaning "Enter" is not the same as "enter"
+
 ## Installation
 
 ```bash
