@@ -1,7 +1,7 @@
 # use-shortcut-lib Overview
 
 A lightweight React utility for handling **keyboard shortcuts** — both **locally** (within focused elements) and **globally** (across the entire document).  
-Implements single-key detection with optional debounce and fine control over which elements respond. 
+Implements single-key detection with optional debounce and fine control over which elements respond.
 
 ## Installation
 
@@ -14,19 +14,18 @@ yarn add use-shortcut-lib
 
 # Hooks and Component created
 
-* useShortCut → A hook for local shortcuts, scoped to a specific element.
+- useShortCut → A hook for local shortcuts, scoped to a specific element.
 
-* useGlobalShortcut → A hook for global shortcuts, active across the whole document.
+- useGlobalShortcut → A hook for global shortcuts, active across the whole document.
 
-* <Shortcut> → A React component wrapper for easier integration in JS
-
+- <Shortcut> → A React component wrapper for easier integration in JS
 
 # Usage Examples
 
 useShortCut Hook
 
 ```tsx
-import { useShortCut } from "use-shortcut-lib";
+import { Shortcut } from "@julianthemarques/use-shortcut-lib";
 
 export function LocalExample() {
   const shortcutHandler = useShortCut(["j", "k"], (key) => {
@@ -43,13 +42,12 @@ export function LocalExample() {
     </div>
   );
 }
-
 ```
 
 <Shortcut> - Component
 
 ```tsx
-import { Shortcut } from "use-shortcut-lib";
+import { Shortcut } from "@julianthemarques/use-shortcut-lib";
 
 export function ShortcutComponentExample() {
   return (
@@ -62,13 +60,12 @@ export function ShortcutComponentExample() {
     </Shortcut>
   );
 }
-
 ```
 
 useGlobalShortcut - Global shortcuts
 
 ```tsx
-import { Shortcut } from "use-shortcut-lib";
+import { Shortcut } from "@julianthemarques/use-shortcut-lib";
 
 export function ShortcutComponentExample() {
   return (
@@ -81,6 +78,4 @@ export function ShortcutComponentExample() {
     </Shortcut>
   );
 }
-
 ```
-
