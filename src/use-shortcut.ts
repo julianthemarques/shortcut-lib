@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 export type IShortcutOptions = {
   debounce?: number;
-  includeClasses?: string[];
-  excludeClasses?: string[];
+  includeSelector?: string[];
+  excludeSelector?: string[];
   preventDefault?: boolean;
 };
 
@@ -30,23 +30,14 @@ const shouldHandle = (
   include?: string[],
   exclude?: string[]
 ) => {
-  if (!target) return false;
+  if (!target) return true;
 
   if (target instanceof Element) {
-    const classList = target.classList;
-
-    if (
-      include &&
-      include.length > 0 &&
-      !include.some((cls) => classList.contains(cls))
-    )
+    if (include && !include.some((cls) => target.closest(`.${cls}`)))
       return false;
-    if (
-      exclude &&
-      exclude.length > 0 &&
-      exclude.some((cls) => classList.contains(cls))
-    )
+    if (exclude && exclude.some((cls) => target.closest(`.${cls}`)))
       return false;
+    return true;
   }
 
   return true;
@@ -64,23 +55,22 @@ const arraysAreEqual = (a?: string[], b?: string[]) => {
 export const useShortCut: IUseShortCut = (keys, onKey, options) => {
   const {
     debounce = 0,
-    includeClasses,
-    excludeClasses,
+    includeSelector,
+    excludeSelector,
     preventDefault = false,
   } = options || {};
 
   if (
-    includeClasses &&
-    excludeClasses &&
-    arraysAreEqual(includeClasses, excludeClasses)
+    includeSelector &&
+    excludeSelector &&
+    arraysAreEqual(includeSelector, excludeSelector)
   )
     return () => {};
 
   const handler = debounce > 0 ? debounceHandler(onKey, debounce) : onKey;
-  
 
   return (event: KeyboardEvent) => {
-    if (!shouldHandle(event.target, includeClasses, excludeClasses)) return;
+    if (!shouldHandle(event.target, includeSelector, excludeSelector)) return;
 
     const keyMatched =
       (typeof keys === "string" && keys === event.key) ||
